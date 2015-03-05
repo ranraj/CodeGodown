@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.portlet.sample">
+	<author>Scalsysu5</author>
+	<namespace>Sample</namespace>
+	<entity name="SampleEntry" uuid="true" local-service="true"
+		remote-service="true">
+		<!-- PK fields -->
+		<column name="entryId" type="long" primary="true"></column>
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="title" type="String"></column>
+		<column name="content" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<column name="status" type="boolean"></column>
+	</entity>
+	
+	
+	<entity name="EntryComment" uuid="true" local-service="true"
+		remote-service="true">
+		<!-- PK fields -->
+		<column name="commentId" type="long" primary="true"></column>
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="comment" type="String"></column>
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		
+	</entity>
+
+</service-builder>

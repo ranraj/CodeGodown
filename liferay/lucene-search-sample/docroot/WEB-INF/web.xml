@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Test1-portlet</display-name>
+
+
+	<listener>
+		<listener-class>com.liferay.portal.kernel.spring.context.PortletContextLoaderListener</listener-class>
+	</listener>
+	
+	
+	<servlet>
+		<servlet-name>PortletActionServlet</servlet-name>
+		<servlet-class>com.liferay.util.bridges.struts.LiferayPortletServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PortletActionServlet</servlet-name>
+		<url-pattern>/portlet_action/*</url-pattern>
+	</servlet-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/aui</taglib-uri>
+			<taglib-location>/WEB-INF/tld/aui.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-bean</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-bean-el</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-bean-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://portals.apache.org/bridges/struts/tags-portlet-html</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-html.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-logic</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-logic.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-logic-el</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-logic-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-nested</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-nested.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-tiles</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-tiles.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://struts.apache.org/tags-tiles-el</taglib-uri>
+			<taglib-location>/WEB-INF/tld/struts-tiles-el.tld</taglib-location>
+		</taglib>
+
+
+
+
+
+	</jsp-config>
+
+</web-app>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.portlet.sample.service.EntryCommentLocalService" class="com.portlet.sample.service.impl.EntryCommentLocalServiceImpl" />
+	<bean id="com.portlet.sample.service.EntryCommentService" class="com.portlet.sample.service.impl.EntryCommentServiceImpl" />
+	<bean id="com.portlet.sample.service.persistence.EntryCommentPersistence" class="com.portlet.sample.service.persistence.EntryCommentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.portlet.sample.service.SampleEntryLocalService" class="com.portlet.sample.service.impl.SampleEntryLocalServiceImpl" />
+	<bean id="com.portlet.sample.service.SampleEntryService" class="com.portlet.sample.service.impl.SampleEntryServiceImpl" />
+	<bean id="com.portlet.sample.service.persistence.SampleEntryPersistence" class="com.portlet.sample.service.persistence.SampleEntryPersistenceImpl" parent="basePersistence" />
+</beans>
