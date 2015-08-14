@@ -1,0 +1,18 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="orders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="order">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="transactions"/>
+            </xs:sequence>
+            <xs:attribute type="xs:int" name="order_id"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="cmd"/>
+      <xs:attribute type="xs:string" name="env"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
