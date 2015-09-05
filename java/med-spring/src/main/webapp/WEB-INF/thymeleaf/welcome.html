@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head th:replace="fragments/headTag :: headTag">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    
+    <title>Med App</title>
+ <!-- Bootstrap Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" />
+    
+    <!-- MetisMenu CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.2/metisMenu.min.css" th:href="@{/webjars/metisMenu/1.1.2/metisMenu.min.css}" rel="stylesheet"/>
+    
+    <!-- Timeline CSS -->
+    <link href="../../../resources/css/timeline.css"
+          th:href="@{/resources/css/timeline.css}" rel="stylesheet" />
+    
+    <!-- Custom CSS -->    
+    
+    <link href="../../../resources/css/main.css"
+          th:href="@{/resources/css/main.css}" rel="stylesheet" />
+    
+    <script  src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+             th:src="@{/webjars/jquery/2.1.3/jquery.js}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"
+            th:src="@{/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.js}"></script>
+    
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"
+          th:href="@{/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.css}" rel="stylesheet" />
+    
+     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/3.3.4/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
+    
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.2/metisMenu.min.js"
+            th:src="@{/webjars/metisMenu/1.1.2/metisMenu.min.js}"></script>
+     <!-- Custom Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" th:href="@{/webjars/font-awesome/4.2.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+   
+        <script src="../../../resources/js/main.js"
+          th:src="@{/resources/js/main.js}"/>
+</head>
+
+<body>
+ <div id="wrapper">
+    
+
+
+    <div th:include="fragments/bodyHeader" th:remove="tag">
+    
+        <img th:src="@{/resources/images/banner-graphic.png}" 
+             src="../../resources/images/banner-graphic.png"/>
+        
+        <div class="navbar" style="width: 601px;">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li style="width: 100px;"><a href="#" th:href="@{/}"><i class="icon-home"></i>Home</a></li>
+                    <li style="width: 130px;"><a href="./owners/findOwners.html" th:href="@{/owners/find.html}"><i class="icon-search"></i>Find owners</a></li>
+                    <li style="width: 140px;"><a href="./vets/vetList.html" th:href="@{/vets.html}"><i class="icon-th-list"></i>Veterinarians</a></li>
+                    <li style="width: 90px;"><a href="./exception.html" th:href="@{/oups.html}" title="trigger a RuntimeException to see how it is handled"><i class="icon-warning-sign"></i>Error</a></li>
+                    <li style="width: 80px;"><a href="#" title="not available yet. Work in progress!!"><i class=" icon-question-sign"></i>Help</a></li>
+                </ul>
+            </div>
+        </div>
+            
+            
+    </div>
+<div id="page-wrapper">
+          
+       <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div>User counts!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div>New Drugs!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bell fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">4</div>
+                                    <div>New Alerts!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-square fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div>Action Items!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            News
+                        </div>
+                        <div class="panel-body">
+                            <p>Medical News Today is a web-based outlet for medical news, targeted to both physicians and the general public. The site was launched in 2003 and reports monthly readership of over 8 million unique visitors.[1] All posted content is available on-line (>250,000 articles as of January 2014) and the earliest available article item is dated from May 2003.</p>
+                        </div>
+                          <div class="panel-footer">
+                           <a href="#"><i class="fa fa-mail-forward"></i> Read more..</a>
+                        </div> 
+                    </div>
+                </div>
+                
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Updates
+                        </div>
+                        <div class="panel-body">
+                            <p>Swine flu viruses may mutate (change) so that they are easily transmissible among humans.The 2009 swine flu outbreak (pandemic) was due to infection with the H1N1 virus and was first observed in Mexico                </p>            
+                        </div>
+                        <!-- <div class="panel-footer">
+                            Panel Footer
+                        </div> -->
+                    </div>
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            
+    
+ </div>
+</div>
+</body>
+
+</html>
