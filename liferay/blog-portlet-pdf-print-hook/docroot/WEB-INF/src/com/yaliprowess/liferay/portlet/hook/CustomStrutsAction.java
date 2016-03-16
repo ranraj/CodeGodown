@@ -18,12 +18,21 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.struts.BaseStrutsPortletAction;
 import com.liferay.portal.kernel.struts.StrutsPortletAction;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DocumentConversionUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceWrapper;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 
 public class CustomStrutsAction extends BaseStrutsPortletAction {
 
@@ -31,15 +40,35 @@ public class CustomStrutsAction extends BaseStrutsPortletAction {
 	public void serveResource(StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse) {
+		
+		long entryId = ParamUtil.getLong(resourceRequest, "entryId");
+		ThemeDisplay themeDisplay =
+				(ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		long entryId = ParamUtil.getLong(resourceRequest, "entryId");		
 		BlogsEntry entry;
-		try {
+		try {			
 			entry = BlogsEntryServiceUtil.getEntry(entryId);
-			InputStream is = new UnsyncByteArrayInputStream(entry.getContent()
-					.toString().getBytes(StringPool.UTF8));
-			File destinationFile = null;
+			StringBundler sb = new StringBundler();
 
+			sb.append("<html>");
+
+			sb.append("<head>");
+			sb.append("<meta content=\"");
+			sb.append(ContentTypes.TEXT_HTML_UTF8);
+			sb.append("\" http-equiv=\"content-type\" />");
+			sb.append("<base href=\"");
+			sb.append(themeDisplay.getPortalURL());
+			sb.append("\" />");
+			sb.append("</head>");
+
+			sb.append("<body>");
+			sb.append(entry.getContent());
+			sb.append("</body>");
+			sb.append("</html>");
+
+			InputStream is = new UnsyncByteArrayInputStream(sb.toString().getBytes(StringPool.UTF8));
+			File destinationFile = null;
+			
 			destinationFile = DocumentConversionUtil.convert(entry.getEntryId()
 					+ "", is, "html", "pdf");
 			OutputStream out = resourceResponse.getPortletOutputStream();
@@ -48,8 +77,9 @@ public class CustomStrutsAction extends BaseStrutsPortletAction {
 					.getHttpServletResponse(resourceResponse);
 			HttpServletRequest httpReq = PortalUtil
 					.getHttpServletRequest(resourceRequest);
+			String contentType = MimeTypesUtil.getContentType(destinationFile);
 			ServletResponseUtil.sendFile(httpReq, httpRes,
-					destinationFile.getName(), in, "application/pdf");
+					destinationFile.getName(), in, contentType);
 			out.close();
 
 		} catch (PortalException e) {
