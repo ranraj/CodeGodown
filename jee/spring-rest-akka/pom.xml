@@ -13,7 +13,7 @@
 	</properties>
 
 	<dependencies>
-	 		
+
 		<!-- Akka -->
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
@@ -49,27 +49,27 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!--Scope Junit test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
-	 
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
-			<scope>provided</scope>			
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -81,20 +81,33 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
-		<!-- Json Path for unit test-->
+
+		<!-- Json Path for unit test -->
 		<dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <version>${jsonpath.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path-assert</artifactId>
-            <version>${jsonpath.version}</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${jsonpath.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path-assert</artifactId>
+			<version>${jsonpath.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Async REST template -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient</artifactId>
+			<version>4.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

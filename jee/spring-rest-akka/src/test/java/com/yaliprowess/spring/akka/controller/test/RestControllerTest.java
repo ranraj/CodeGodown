@@ -14,9 +14,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.yaliprowess.spring.akka.config.AppConfiguration;
+import com.yaliprowess.spring.akka.config.AppInitializer;
+
  
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
+@ContextConfiguration(classes=AppConfiguration.class)
 @WebAppConfiguration
 public class RestControllerTest {
 	
