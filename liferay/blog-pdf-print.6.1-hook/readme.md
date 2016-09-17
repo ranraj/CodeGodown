@@ -7,3 +7,5 @@ Dependency : jsPDF
 ```
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 ```
+
+Write liferay hook and override the blogs view entries page
