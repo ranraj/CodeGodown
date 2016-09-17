@@ -14,3 +14,5 @@ This is the default implemenation provided by liferay to convert document to pdf
 in portlet like Document and medica libraray.
 
 DocumentConvertionUtil Api required OpenOffice service to be already running and configured in the portal server.
+
+Ref url : https://web.liferay.com/community/wiki/-/wiki/Main/Document+Conversion+with+OpenOffice
