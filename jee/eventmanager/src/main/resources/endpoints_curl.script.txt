@@ -1,0 +1,11 @@
+############ Health Check API ######################
+curl -H http://localhost:8080/simplerest/api/healthcheck
+############ Event API ######################
+curl -H "Content-Type: application/json" -X POST -d "{"description": "Enjoy",
+  "name": "Happy hour"
+}" http://localhost:8080/simplerest/api/events
+curl -X GET http://localhost:8080/simplerest/api/events
+curl -X GET http://localhost:8080/simplerest/api/events/1
+curl -H "Content-Type: application/json" -X POST -d "{"description": "Enjoyment",
+  "name": "Happy hour1"
+}" http://localhost:8080/simplerest/api/events
