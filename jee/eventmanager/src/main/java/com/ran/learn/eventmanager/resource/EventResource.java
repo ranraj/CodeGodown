@@ -5,14 +5,11 @@
  */
 package com.ran.learn.eventmanager.resource;
 
-import com.ran.learn.eventmanager.HealthCheck;
-import com.ran.learn.eventmanager.entity.Event;
-import com.ran.learn.eventmanager.service.EventService;
-import com.ran.learn.eventmanager.to.EventTO;
-
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -25,6 +22,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.ran.learn.eventmanager.HealthCheck;
+import com.ran.learn.eventmanager.entity.Event;
+import com.ran.learn.eventmanager.service.EventService;
+import com.ran.learn.eventmanager.to.EventTO;
 
 /**
  *
@@ -40,7 +42,7 @@ public class EventResource {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(EventTO event) {
+	public Response create(EventTO event) throws ParseException {
 		LOGGER.log(Level.INFO, "Create event for {0}", event);
 		long createdId = service.create(event);
 		return Response.status(Response.Status.CREATED).header("Location", "events/" + String.valueOf(createdId))
@@ -65,7 +67,7 @@ public class EventResource {
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") Long id, EventTO event) {
+	public Response update(@PathParam("id") Long id, EventTO event) throws ParseException {
 		LOGGER.log(Level.INFO, "Update event for {0}", event);
 		if (id == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();

@@ -6,18 +6,6 @@
 package com.ran.learn.eventmanager.to;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -31,8 +19,9 @@ public class EventTO implements Serializable {
 	private long id;
 	private String name;
 	private String description;
-	private Date date;
-	
+
+	private String date;
+
 	public EventTO() {
 	}
 
@@ -60,11 +49,11 @@ public class EventTO implements Serializable {
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

@@ -5,13 +5,19 @@
  */
 package com.ran.learn.eventmanager.service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
+
 import com.ran.learn.eventmanager.entity.Event;
 import com.ran.learn.eventmanager.repository.EventRepository;
 import com.ran.learn.eventmanager.to.EventTO;
+import com.ran.learn.eventmanager.utils.Constants;
 
 /**
  *
@@ -22,13 +28,13 @@ public class EventService {
 	@Inject
 	EventRepository repository;
 
-	public long create(EventTO eventTO) {
+	public long create(EventTO eventTO) throws ParseException {
 		Event event = toEntity(eventTO);
 		repository.create(event);
 		return event.getId();
 	}
 
-	public void update(EventTO eventTO) {
+	public void update(EventTO eventTO) throws ParseException {
 		Event event = toEntity(eventTO);
 		repository.update(event);
 	}
@@ -45,12 +51,16 @@ public class EventService {
 		return repository.findAll();
 	}
 
-	private Event toEntity(EventTO e) {
+	private Event toEntity(EventTO e) throws ParseException {
 		if (e == null) {
 			return null;
 		}
 		Event event = new Event();
-		event.setDate(e.getDate());
+		if (e.getDate() != null) {
+			final String[] parsers = new String[] { Constants.TIMESTAMP_FORMAT };
+			Date date = DateUtils.parseDate(e.getDate(), parsers);
+			event.setDate(date);
+		}
 		event.setDescription(e.getDescription());
 		event.setId(e.getId());
 		event.setName(e.getName());
@@ -62,7 +72,9 @@ public class EventService {
 			return null;
 		}
 		EventTO event = new EventTO();
-		event.setDate(e.getDate());
+		if (e.getDate() != null) {
+			event.setDate(DateFormatUtils.format(e.getDate(), Constants.TIMESTAMP_FORMAT));
+		}
 		event.setDescription(e.getDescription());
 		event.setId(e.getId());
 		event.setName(e.getName());
