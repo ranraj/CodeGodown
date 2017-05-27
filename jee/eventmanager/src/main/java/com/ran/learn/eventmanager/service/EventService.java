@@ -17,25 +17,26 @@ import javax.inject.Inject;
 public class EventService {
 
     @Inject
-    EventRepository service;
+    EventRepository repository;
 
-    public void create(Event event) {
-        service.create(event);
+    public long create(Event event) {
+        repository.create(event);
+        return event.getId();
     }
 
     public void update(Event event) {
-        service.update(event);
+        repository.update(event);
     }
 
     public void remove(long id) {
-        service.remove(id);
+        repository.remove(id);
     }
 
     public Event find(long id) {
-        return service.find(id);
+        return repository.find(id);
     }
 
     public List<Event> findAll() {
-        return service.findAll();
+        return repository.findAll();
     }
 }

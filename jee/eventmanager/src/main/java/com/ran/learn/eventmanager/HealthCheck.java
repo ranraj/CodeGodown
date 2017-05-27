@@ -41,8 +41,9 @@ public class HealthCheck {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getHealth() {
+    	 LOGGER.log(Level.INFO, "Api call for "+context.getPath());
         try {
-            Map<String,String> healthResponse = new HashMap();
+            Map<String,String> healthResponse = new HashMap<>();
             healthResponse.put("Message", "I am good");
             healthResponse.put("Date", new Date().toString());
             ObjectMapper mapper = new ObjectMapper();

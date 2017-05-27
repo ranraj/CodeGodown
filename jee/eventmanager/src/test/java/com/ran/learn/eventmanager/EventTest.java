@@ -55,12 +55,12 @@ public class EventTest {
         Assert.assertThat(result, CoreMatchers.equalTo(origin));*/
  
         // Update
-        entity.getEntity().setName("Modified");
+        /*entity.getEntity().setName("Modified");
         response = target.request().put(entity);
         Assert.assertThat(response.getStatus(), CoreMatchers.equalTo(204));
         
         // Delete
         target.path(String.valueOf(origin.getId())).request(MediaType.APPLICATION_JSON).delete();
-        Assert.assertThat(response.getStatus(), CoreMatchers.equalTo(204));
+        Assert.assertThat(response.getStatus(), CoreMatchers.equalTo(204));*/
     }
 }

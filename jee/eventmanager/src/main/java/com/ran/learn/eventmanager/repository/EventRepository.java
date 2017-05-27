@@ -9,6 +9,7 @@ import com.ran.learn.eventmanager.entity.Event;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -17,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EventRepository {
-    @PersistenceContext
+    @PersistenceContext(unitName="event-manager")
     EntityManager em;
  
     public void create(Event event) {
@@ -38,6 +39,6 @@ public class EventRepository {
     }
 
     public List<Event> findAll() {
-        return em.createQuery("select e from Event e", Event.class).getResultList();
+        return em.createNamedQuery("Event.findAll", Event.class).getResultList();
     }
 }
