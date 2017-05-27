@@ -8,6 +8,8 @@ package com.ran.learn.eventmanager.resource;
 import com.ran.learn.eventmanager.HealthCheck;
 import com.ran.learn.eventmanager.entity.Event;
 import com.ran.learn.eventmanager.service.EventService;
+import com.ran.learn.eventmanager.to.EventTO;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,24 +34,23 @@ import javax.ws.rs.core.Response;
 @Path("events")
 public class EventResource {
 	private static final Logger LOGGER = Logger.getLogger(HealthCheck.class.getName());
-	
+
 	@Inject
 	private EventService service;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Event event) {
+	public Response create(EventTO event) {
 		LOGGER.log(Level.INFO, "Create event for {0}", event);
 		long createdId = service.create(event);
-		return Response.status(Response.Status.CREATED)
-		.header("Location",
-				"events/"+ String.valueOf(createdId)).build();
+		return Response.status(Response.Status.CREATED).header("Location", "events/" + String.valueOf(createdId))
+				.build();
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Event find(@PathParam("id") long id) {
+	public EventTO find(@PathParam("id") long id) {
 		LOGGER.log(Level.INFO, "Find event for {0}", id);
 		return service.find(id);
 	}
@@ -64,32 +65,24 @@ public class EventResource {
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") Long id,Event event) {
+	public Response update(@PathParam("id") Long id, EventTO event) {
 		LOGGER.log(Level.INFO, "Update event for {0}", event);
-		if(id==null) {
-			return Response
-    				.status(Response.Status.BAD_REQUEST)
-    				.build();
+		if (id == null) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		event.setId(id);
 		service.update(event);
-		return Response
-				.status(Response.Status.OK)
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") Long id) {
-		if(id==null) {
-			return Response
-    				.status(Response.Status.BAD_REQUEST)
-    				.build();
+		if (id == null) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		service.remove(id);
 		LOGGER.log(Level.INFO, "Delete event {0}", id);
-		return Response
-				.status(Response.Status.OK)
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
 }

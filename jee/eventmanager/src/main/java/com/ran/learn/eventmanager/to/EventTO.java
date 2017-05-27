@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ran.learn.eventmanager.entity;
+package com.ran.learn.eventmanager.to;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,24 +23,17 @@ import javax.persistence.TemporalType;
  *
  * @author rdhanasekar
  */
-@Entity
-@Table(name = "Event")
-@NamedQueries({ @NamedQuery(name = "Event.findAll", query = "select e from Event e") })
-public class Event implements Serializable {
+
+public class EventTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
 	private String description;
-
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name="event_date")
 	private Date date;
 	
-	public Event() {
+	public EventTO() {
 	}
 
 	public void setId(long id) {
@@ -77,7 +70,7 @@ public class Event implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Event{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+		return "EventTO{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
 	}
 
 }

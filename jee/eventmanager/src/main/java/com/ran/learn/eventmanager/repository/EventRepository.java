@@ -18,27 +18,27 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EventRepository {
-    @PersistenceContext(unitName="event-manager")
-    EntityManager em;
- 
-    public void create(Event event) {
-        em.persist(event);
-    }
- 
-    public void update(Event event) {
-        em.merge(event);
-    }
- 
-    public void remove(long id) {
-        Event customer = find(id);
-        em.remove(customer);
-    }
- 
-    public Event find(long id) {
-        return em.find(Event.class, id);
-    }
+	@PersistenceContext(unitName = "event-manager")
+	EntityManager em;
 
-    public List<Event> findAll() {
-        return em.createNamedQuery("Event.findAll", Event.class).getResultList();
-    }
+	public void create(Event event) {
+		em.persist(event);
+	}
+
+	public void update(Event event) {
+		em.merge(event);
+	}
+
+	public void remove(long id) {
+		Event customer = find(id);
+		em.remove(customer);
+	}
+
+	public Event find(long id) {
+		return em.find(Event.class, id);
+	}
+
+	public List<Event> findAll() {
+		return em.createNamedQuery("Event.findAll", Event.class).getResultList();
+	}
 }
