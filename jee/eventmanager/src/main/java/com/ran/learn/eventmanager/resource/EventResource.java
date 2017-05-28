@@ -58,11 +58,22 @@ public class EventResource {
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Event> findAll() {
 		LOGGER.log(Level.INFO, "Find All events");
 		return service.findAll();
 	}
+
+	// TODO: do the pagirnation
+	// TODO : aync
+	/*
+	 * @GET
+	 * 
+	 * @Produces(MediaType.APPLICATION_JSON) public List<Event>
+	 * findAllinPage(@QueryParam("start") Integer from, @QueryParam("page")
+	 * Integer page) { LOGGER.log(Level.INFO, "Find All events"); return
+	 * service.findAll(); }
+	 */
 
 	@PUT
 	@Path("{id}")

@@ -8,47 +8,43 @@ package com.ran.learn.eventmanager.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.apache.commons.lang.time.DateFormatUtils;
+
+import com.ran.learn.eventmanager.to.EventTO;
+import com.ran.learn.eventmanager.utils.Constants;
 
 /**
  *
  * @author rdhanasekar
  */
 @Entity
-@Table(name = "Event")
+@Table(name = "event")
 @NamedQueries({ @NamedQuery(name = "Event.findAll", query = "select e from Event e") })
-public class Event implements Serializable {
+public class Event extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
 	private String name;
 	private String description;
 
 	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name="event_date")
+	@Column(name = "event_date")
 	private Date date;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Place place;
+
 	public Event() {
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -75,9 +71,28 @@ public class Event implements Serializable {
 		this.date = date;
 	}
 
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public EventTO getEventTO() {
+		EventTO event = new EventTO();
+		if (this.getDate() != null) {
+			event.setDate(DateFormatUtils.format(this.getDate(), Constants.TIMESTAMP_FORMAT));
+		}
+		event.setDescription(this.getDescription());
+		event.setId(this.getId());
+		event.setName(this.getName());
+		return event;
+	}
+
 	@Override
 	public String toString() {
-		return "Event{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+		return "Event{" + "id=" + getId() + ", name=" + name + ", description=" + description + '}';
 	}
 
 }
