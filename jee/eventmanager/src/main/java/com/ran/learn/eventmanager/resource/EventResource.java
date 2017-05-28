@@ -6,7 +6,8 @@
 package com.ran.learn.eventmanager.resource;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +25,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.ran.learn.eventmanager.HealthCheck;
-import com.ran.learn.eventmanager.entity.Event;
 import com.ran.learn.eventmanager.service.EventService;
 import com.ran.learn.eventmanager.to.EventTO;
 
@@ -52,14 +52,19 @@ public class EventResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public EventTO find(@PathParam("id") long id) {
+	public Response find(@PathParam("id") long id) {
 		LOGGER.log(Level.INFO, "Find event for {0}", id);
-		return service.find(id);
+		Optional<EventTO> event = service.find(id);
+		if (event.isPresent()) {
+			LOGGER.log(Level.INFO, "Fetched content {0}", event.get());
+			return Response.status(Response.Status.OK).entity(event.get()).build();
+		}
+		return Response.status(Response.Status.BAD_REQUEST).build();
 	}
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Event> findAll() {
+	public Set<EventTO> findAll() {
 		LOGGER.log(Level.INFO, "Find All events");
 		return service.findAll();
 	}

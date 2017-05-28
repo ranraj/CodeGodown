@@ -1,10 +1,13 @@
 package com.ran.learn.eventmanager.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ran.learn.eventmanager.to.GeoLocationTO;
@@ -18,6 +21,17 @@ public class GeoLocation extends AbstractEntity implements Serializable {
 
 	private String latitude;
 	private String longitude;
+
+	@OneToMany(mappedBy = "geoLocation", targetEntity = Place.class, cascade = CascadeType.ALL)
+	private Set<Place> places;
+
+	public Set<Place> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(Set<Place> places) {
+		this.places = places;
+	}
 
 	public String getLatitude() {
 		return latitude;

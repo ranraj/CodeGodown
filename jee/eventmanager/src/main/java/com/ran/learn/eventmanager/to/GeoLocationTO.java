@@ -1,5 +1,7 @@
 package com.ran.learn.eventmanager.to;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.gson.JsonObject;
@@ -15,6 +17,8 @@ public class GeoLocationTO {
 	private Long id;
 	private String latitude;
 	private String longitude;
+
+	private Set<PlaceTO> places;
 
 	public Long getId() {
 		return id;
@@ -40,10 +44,18 @@ public class GeoLocationTO {
 		this.longitude = longitude;
 	}
 
+	public Set<PlaceTO> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(Set<PlaceTO> places) {
+		this.places = places;
+	}
+
 	public GeoLocation getGeoLocation() {
 		GeoLocation geoLocation = new GeoLocation();
-		geoLocation.setLatitude(this.latitude);
-		geoLocation.setLongitude(this.longitude);
+		geoLocation.setLatitude(this.getLatitude());
+		geoLocation.setLongitude(this.getLongitude());
 		return geoLocation;
 	}
 
@@ -59,6 +71,17 @@ public class GeoLocationTO {
 			this.setLongitude(jsonObject.get("longitude").getAsString());
 		}
 		return this;
+	}
+
+	public StringBuffer toJson() {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer = buffer.append("{");
+		buffer = buffer.append("\"id\":\"").append(this.getId()).append("\",");
+		buffer = buffer.append("\"latitude\":\"").append(this.getLatitude()).append("\",");
+		buffer = buffer.append("\"longitude\":\"").append(this.getLongitude()).append("\"");
+		buffer = buffer.append("}");
+		return buffer;
 	}
 
 }

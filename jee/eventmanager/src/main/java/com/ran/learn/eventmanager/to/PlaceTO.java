@@ -106,14 +106,17 @@ public class PlaceTO {
 
 	public Place getPlaceTO() {
 		Place place = new Place();
+		place.setId(this.getId());
 		place.setCountry(this.getCountry());
 		place.setLine1(this.getLine1());
 		place.setLine2(this.getLine2());
 		place.setName(this.getName());
-		place.setPhoneNumber(phoneNumber);
+		place.setPhoneNumber(this.getPhoneNumber());
 		place.setState(this.getState());
-		place.setZipCode(this.zipCode);
-		place.setGeoLocation(geoLocationTO.getGeoLocation());
+		place.setZipCode(this.getZipCode());
+		if (this.getGeoLocation() != null) {
+			place.setGeoLocation(this.getGeoLocation().getGeoLocation());
+		}
 		return place;
 	}
 
@@ -145,5 +148,29 @@ public class PlaceTO {
 			this.setGeoLocation(new GeoLocationTO().fromJson(placeObject));
 		}
 		return this;
+	}
+
+	public StringBuffer toJson() {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer = buffer.append("{");
+		buffer = buffer.append("\"id\":\"").append(this.getId()).append("\",");
+		buffer = buffer.append("\"name\":\"").append(this.getName()).append("\",");
+		buffer = buffer.append("\"line1\":\"").append(this.getLine1() != null ? this.getLine1() : "").append("\",");
+		buffer = buffer.append("\"line2\":\"").append(this.getLine2() != null ? this.getLine2() : "").append("\",");
+		buffer = buffer.append("\"phoneNumber\":\"").append(this.getPhoneNumber() != null ? this.getPhoneNumber() : "")
+				.append("\",");
+		buffer = buffer.append("\"state\":\"").append(this.getState() != null ? this.getState() : "").append("\",");
+		buffer = buffer.append("\"zipCode\":\"").append(this.getZipCode() != null ? this.getZipCode() : "");
+
+		if (this.getGeoLocation() != null) {
+			buffer.append("\",");
+			buffer = buffer.append("\"geoLocation\":").append(this.getGeoLocation().toJson());
+		} else {
+			buffer.append("\"");
+		}
+
+		buffer = buffer.append("}");
+		return buffer;
 	}
 }

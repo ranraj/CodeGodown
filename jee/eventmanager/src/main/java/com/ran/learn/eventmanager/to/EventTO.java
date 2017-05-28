@@ -87,7 +87,7 @@ public class EventTO implements Serializable {
 		event.setId(this.getId());
 		event.setName(this.getName());
 		if (this.place != null) {
-			event.setPlace(this.place.getPlaceTO());
+			event.setPlace(this.getPlace().getPlaceTO());
 		}
 		return event;
 	}
@@ -108,6 +108,24 @@ public class EventTO implements Serializable {
 			this.setPlace(new PlaceTO().fromJson(placeObject));
 		}
 		return this;
+	}
+
+	public StringBuffer toJson() {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer = buffer.append("{");
+		buffer = buffer.append("\"id\":\"").append(this.getId()).append("\",");
+		buffer = buffer.append("\"name\":\"").append(this.getName()).append("\",");
+		buffer = buffer.append("\"description\":\"").append(this.getDescription());
+
+		if (this.place != null) {
+			buffer.append("\",");
+			buffer = buffer.append("\"place\":").append(this.place.toJson());
+		} else {
+			buffer.append("\"");
+		}
+		buffer = buffer.append("}");
+		return buffer;
 	}
 
 	@Override

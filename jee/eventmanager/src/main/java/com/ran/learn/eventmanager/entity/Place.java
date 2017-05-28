@@ -105,16 +105,19 @@ public class Place extends AbstractEntity implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public PlaceTO getPlace() {
+	public PlaceTO getPlaceTO() {
 		PlaceTO place = new PlaceTO();
+		place.setId(this.getId());
 		place.setCountry(this.getCountry());
 		place.setLine1(this.getLine1());
 		place.setLine2(this.getLine2());
 		place.setName(this.getName());
-		place.setPhoneNumber(phoneNumber);
+		place.setPhoneNumber(this.getPhoneNumber());
 		place.setState(this.getState());
-		place.setZipCode(this.zipCode);
-		// place.setGeoLocation(this.geoLocation.getGeoLocationTO());
+		place.setZipCode(this.getZipCode());
+		if (this.getGeoLocation() != null) {
+			place.setGeoLocation(this.getGeoLocation().getGeoLocationTO());
+		}
 		return place;
 	}
 

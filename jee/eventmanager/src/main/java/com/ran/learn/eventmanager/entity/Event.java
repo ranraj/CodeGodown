@@ -87,6 +87,9 @@ public class Event extends AbstractEntity implements Serializable {
 		event.setDescription(this.getDescription());
 		event.setId(this.getId());
 		event.setName(this.getName());
+		if (this.place != null) {
+			event.setPlace(this.place.getPlaceTO());
+		}
 		return event;
 	}
 

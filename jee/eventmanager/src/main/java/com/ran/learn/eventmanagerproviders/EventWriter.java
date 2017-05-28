@@ -2,6 +2,7 @@ package com.ran.learn.eventmanagerproviders;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -31,6 +32,13 @@ public class EventWriter implements MessageBodyWriter<EventTO> {
 	public void writeTo(EventTO event, Class<?> aClass, Type type, Annotation[] annotations, MediaType mediaType,
 			MultivaluedMap<String, Object> stringObjectMultivaluedMap, OutputStream outputStream)
 			throws IOException, WebApplicationException {
-		// TODO: Not required
+		if (mediaType.getType().equals("application") && mediaType.getSubtype().equals("json")) {
+			System.out.println(event.toJson().toString());
+			try (PrintStream printStream = new PrintStream(outputStream)) {
+				printStream.print(event.toJson().toString());
+			}
+			return;
+		}
+		throw new UnsupportedOperationException("Not supported MediaType: " + mediaType);
 	}
 }

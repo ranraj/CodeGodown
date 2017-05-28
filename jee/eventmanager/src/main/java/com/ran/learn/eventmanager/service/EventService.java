@@ -6,7 +6,9 @@
 package com.ran.learn.eventmanager.service;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -38,12 +40,13 @@ public class EventService {
 		repository.remove(id);
 	}
 
-	public EventTO find(long id) {
-		return repository.find(id).getEventTO();
+	public Optional<EventTO> find(long id) {
+		Event event = repository.find(id);
+		return event != null ? Optional.of(event.getEventTO()) : Optional.empty();
 	}
 
-	public List<Event> findAll() {
-		return repository.findAll();
+	public Set<EventTO> findAll() {
+		return repository.findAll().stream().map(event -> event.getEventTO()).collect(Collectors.toSet());
 	}
 
 }
